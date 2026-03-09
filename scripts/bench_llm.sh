@@ -19,12 +19,14 @@ echo "waiting for llama-server to be ready ..."
 sleep 3
 
 READY=0
-for i in $(seq 1 300); do
+attempt=0
+while [ "$attempt" -lt 300 ]; do
   # curl 默认对 4xx/5xx 也返回 0，需要用 -f 让 HTTP 错误变为非 0
   if curl -fsS "http://127.0.0.1:${PORT}/v1/models" >/dev/null 2>&1; then
     READY=1
     break
   fi
+  attempt=$((attempt + 1))
   sleep 2
 done
 
