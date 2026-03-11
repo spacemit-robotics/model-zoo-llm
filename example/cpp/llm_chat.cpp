@@ -12,6 +12,7 @@
 #include <mutex>
 #include <optional>
 #include <string>
+#include <cstdlib>
 
 #include "llm_service.h"
 
@@ -65,7 +66,9 @@ int main(int argc, char** argv) {
     }
 
     try {
-        spacemit_llm::LLMService llm(model, api_base, "EMPTY", prompt, max_tokens);
+        const char* key_env = std::getenv("OPENAI_API_KEY");
+        std::string api_key = key_env ? key_env : "";
+        spacemit_llm::LLMService llm(model, api_base, api_key, prompt, max_tokens);
 
         std::cout << "=== LLM (OpenAI-compatible) ===\n";
         std::cout << "API base: " << api_base << "\n";

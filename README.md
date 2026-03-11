@@ -149,6 +149,14 @@ cd build
 ./example/cpp/llm_chat "你好" "http://localhost:8080/v1" "qwen2.5-0.5b" "You are a helpful assistant." 256
 ```
 
+若使用**云端 / 远端 OpenAI 兼容服务**（如 DeepSeek 等），只需将第 2 个参数替换为云端的 `api_base`，并通过环境变量传入 API Key，例如：
+
+```bash
+export OPENAI_API_KEY=你的云端key
+./example/cpp/llm_chat "你好" "https://api.deepseek.com" "deepseek-chat" "You are a helpful assistant." 256
+```
+
+
 ### 3.4. API使用
 
 - API 说明、多轮对话与 Tool Calling、自定义 Backend 等详见 **官方文档**（链接待补充）。
